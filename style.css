@@ -1,0 +1,204 @@
+:root {
+  --bg-1: #ffd7e6;
+  --bg-2: #ffeef5;
+  --accent: #ff4f87;
+  --deep: #b11b55;
+  --gold: #ffd56a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(circle at top, var(--bg-2), var(--bg-1));
+  overflow: hidden;
+  color: #6a0f35;
+}
+
+.sky-glow {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 20% 20%, #ffffff90, transparent 30%),
+    radial-gradient(circle at 80% 30%, #ffd0e790, transparent 30%);
+  animation: breathe 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.container {
+  position: relative;
+  z-index: 3;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(1.3rem, 3vw, 2.1rem);
+  text-shadow: 0 2px 10px #ffffffa0;
+}
+
+.envelope-wrapper {
+  position: relative;
+  width: min(92vw, 420px);
+  height: 300px;
+  perspective: 1000px;
+}
+
+.envelope {
+  position: absolute;
+  inset: 0;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #ff7ca7, #ff5f97);
+  box-shadow: 0 20px 40px #ca2a6845;
+  cursor: pointer;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+.envelope-front {
+  position: absolute;
+  inset: auto 0 28px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 6px #8f1842;
+}
+
+.flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 65%;
+  background: linear-gradient(180deg, #ff8ab1, #ff5f97);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top;
+  transition: transform 1s ease;
+  box-shadow: inset 0 -5px 10px #c62d64;
+}
+
+.letter {
+  position: absolute;
+  left: 5%;
+  top: 8%;
+  width: 90%;
+  height: 84%;
+  background: #fffafc;
+  border-radius: 12px;
+  box-shadow: 0 15px 30px #d6367340;
+  padding: 1.2rem;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(35px) scale(0.95);
+  transition: all 1s ease;
+  pointer-events: none;
+}
+
+.letter h2 {
+  margin-top: 0;
+  color: var(--deep);
+}
+
+.letter p {
+  margin: 0.45rem 0;
+  line-height: 1.5;
+}
+
+.signature {
+  margin-top: 0.9rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.envelope-wrapper.open .flap {
+  transform: rotateX(170deg);
+}
+
+.envelope-wrapper.open .letter {
+  opacity: 1;
+  transform: translateY(-30px) scale(1);
+  pointer-events: auto;
+}
+
+.controls {
+  z-index: 3;
+}
+
+.music-btn {
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent), #ff7cab);
+  color: white;
+  font-weight: 700;
+  padding: 0.8rem 1.4rem;
+  cursor: pointer;
+  box-shadow: 0 10px 20px #d4327250;
+}
+
+.floating-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.float-item {
+  position: absolute;
+  bottom: -10vh;
+  animation: rise linear forwards;
+  opacity: 0.85;
+}
+
+.heart {
+  color: #ff2e73;
+  filter: drop-shadow(0 2px 4px #ad1e4a66);
+}
+
+.flower {
+  color: var(--gold);
+  filter: drop-shadow(0 2px 4px #b1851266);
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(0) scale(0.8) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.95;
+  }
+  to {
+    transform: translateY(-120vh) scale(1.2) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .envelope-wrapper {
+    height: 330px;
+  }
+
+  .letter {
+    font-size: 0.92rem;
+  }
+}
